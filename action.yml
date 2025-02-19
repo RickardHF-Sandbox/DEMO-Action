@@ -22,6 +22,7 @@ runs:
   using: "composite"
   steps:
     - name: Writes something out
+      shell: bash
       run: echo Hello ${{ inputs.MESSAGE }}
     - name: Summarizes the numbers
       id: summarizer
