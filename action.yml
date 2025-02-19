@@ -25,6 +25,7 @@ runs:
       run: echo Hello ${{ inputs.MESSAGE }}
     - name: Summarizes the numbers
       id: summarizer
+      shell: bash
       run: |
         a=${{ inputs.a }}
         b=${{ inputs.b }}
