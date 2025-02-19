@@ -1,1 +1,39 @@
 
+name: Some Demo Action
+description: This doesnt do anything super useful
+author: RickardHF
+
+inputs:
+  message:
+    description: The message to output
+    required: true
+  a:
+    description: Number a
+    required: true
+  b:
+    description: Number b
+    required: false
+outputs:
+  sum:
+    description: Sum of the numbers
+    value: ${{ steps.summarizer.outputs.sum }}
+
+runs:
+  using: "composite"
+  steps:
+    - name: Writes something out
+      run: echo Hello ${{ inputs.MESSAGE }}
+    - name: Summarizes the numbers
+      id: summarizer
+      run: |
+        a=${{ inputs.a }}
+        b=${{ inputs.b }}
+
+        if [ -z "$b" ]; then
+          result=$a
+        else
+          result=$(( a + b ))
+        fi
+
+        echo "sum=$result" >> $GITHUB_OUTPUT
+        
